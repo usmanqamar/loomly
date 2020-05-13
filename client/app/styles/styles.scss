@@ -1,0 +1,27 @@
+h4 {
+  margin-top: 20px;
+}
+
+.calendar {
+  font-size: 14px;
+  min-height: calc(100vh - 100px);
+  min-height: max-content;
+  height: calc(100vh - 100px);
+  width: 100%;
+  margin: auto;
+
+&,
+& > * {
+    display: flex;
+    flex-direction: column;
+  }
+
+.rbc-calendar {
+  flex: 1;
+  min-height: 580px;
+}
+}
+
+.special-day {
+  background-color: #fec;
+}

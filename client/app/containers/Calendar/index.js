@@ -20,7 +20,7 @@ const key = 'home';
 import * as dates from '../../../../cal/src/utils/dates'
 
 
-export function Home({ images, loading, fetchImages }) {
+export function CalendarContainer({ images, loading, fetchImages }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
@@ -39,12 +39,6 @@ export function Home({ images, loading, fetchImages }) {
         start: new Date(),
         end: new Date(),
       },
-      {
-        id: 1,
-        title: 'Long Event',
-        start: new Date(2020, 3, 7),
-        end: new Date(2020, 3, 10),
-      }
     ]
 
     const ColoredDateCellWrapper = ({ children }) =>
@@ -62,7 +56,17 @@ export function Home({ images, loading, fetchImages }) {
           <meta name="description" content="Gallery" />
         </Helmet>
         <div className='calendar'>
-         Home page
+          <Calendar
+            events={events}
+            localizer={localizer}
+            startAccessor="start"
+            endAccessor="end"
+            onSelectEvent={event => alert(event.title)}
+
+            components={{
+              timeSlotWrapper: ColoredDateCellWrapper,
+            }}
+          />
         </div>
 
 
@@ -71,7 +75,7 @@ export function Home({ images, loading, fetchImages }) {
   );
 }
 
-Home.propTypes = {
+Calendar.propTypes = {
   fetchImages: PropTypes.func.isRequired,
   images: PropTypes.array.isRequired,
   loading: PropTypes.bool,
@@ -96,4 +100,4 @@ export default compose(
   withConnect,
   withRouter,
   memo,
-)(Home);
+)(CalendarContainer);

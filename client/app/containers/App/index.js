@@ -11,35 +11,39 @@ import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 
-import Home from 'containers/Home/Loadable';
+import Home from '../Home/Loadable';
+import Calendar from '../Calendar/Loadable';
 
 import Header from 'components/Header';
 import GlobalStyle from '../../global-styles';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "tabler-react/dist/Tabler.css";
+import '../../styles/styles.scss'
 
 const AppWrapper = styled.div`
-  max-width: calc(1200px + 16px * 2);
+  //max-width: calc(1264px + 16px * 2);
   margin: 0 auto;
   display: flex;
   min-height: 100%;
-  padding: 0 16px;
+  //padding: 0 16px;
   flex-direction: column;
 `;
 
 const Content = styled.div`
-  margin-top: 36px;
+  //margin-top: 36px;
 `;
 
 export default function App() {
   return (
     <AppWrapper>
-      <Helmet titleTemplate="%s - Assignment">
-        <meta name="description" content="Assignment" />
+      <Helmet titleTemplate="%s - Loomly">
+        <meta name="description" content="" />
       </Helmet>
-      <Header />
+      {/*<Header />*/}
       <Content>
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/calendar" exact component={Calendar} />
         </Switch>
       </Content>
       <GlobalStyle />

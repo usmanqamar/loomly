@@ -9,9 +9,7 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.5;
   }
 
-  body {
-    background-color: '#eee'
-  }
+ 
 
   body.fontLoaded {
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -34,13 +32,7 @@ const GlobalStyle = createGlobalStyle`
     margin: auto !important
 
    }
-   .toggler.react-toggle--checked .react-toggle-track {
-     background-color: #007bff;
-     
-    }
-    .toggler {
-      vertical-align:middle
-    }
+  
 `;
 
 export default GlobalStyle;
