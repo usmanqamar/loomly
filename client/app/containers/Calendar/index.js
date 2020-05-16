@@ -11,7 +11,7 @@ import reducer from './reducer';
 import saga from './saga';
 import LoadingIndicator from '../../components/LoadingIndicator';
 import 'react-toggle/style.css';
-import SiteWrapper from "../../components/SiteWrapper";
+import SiteWrapper from "../Wrapper/SiteWrapper";
 import {Page} from "tabler-react";
 import { Calendar, Views, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'

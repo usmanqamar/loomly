@@ -1,13 +1,21 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
-
 import history from 'utils/history';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage/session';
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
 
+const persistConfig = {
+  key: 'root',
+  storage,
+  blacklist: ['router'],
+  stateReconciler: autoMergeLevel2,
+};
 export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
     router: connectRouter(history),
     ...injectedReducers,
   });
 
-  return rootReducer;
+  return persistReducer(persistConfig, rootReducer);
 }

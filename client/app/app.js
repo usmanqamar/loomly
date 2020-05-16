@@ -17,6 +17,8 @@ import { ConnectedRouter } from 'connected-react-router';
 import FontFaceObserver from 'fontfaceobserver';
 import history from 'utils/history';
 import App from 'containers/App';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
 import configureStore from './configureStore';
 
 // Import i18n messages
@@ -30,16 +32,19 @@ openSansObserver.load().then(() => {
 });
 
 // Create redux store with history
-const initialState = {};
+const initialState = { home: { loading: true } };
 const store = configureStore(initialState, history);
+const persistor = persistStore(store);
 const MOUNT_NODE = document.getElementById('app');
 
 const render = () => {
   ReactDOM.render(
     <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <App />
-      </ConnectedRouter>
+      <PersistGate loading={null} persistor={persistor}>
+        <ConnectedRouter history={history}>
+          <App />
+        </ConnectedRouter>
+      </PersistGate>
     </Provider>,
     MOUNT_NODE,
   );

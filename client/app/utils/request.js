@@ -39,18 +39,20 @@ function checkStatus(response) {
  *
  * @return {object}           The response data
  */
-export default function request(url, method, headers) {
+export default function request(url, data, method = 'POST', headers) {
   const headersData = headers || [];
   headersData.push({
     'Content-Type': 'application/json',
-    Authorization: `Client-ID ${CLIENT_ID}`,
   });
+
+  // @TODO
+  const body = JSON.stringify({data: {...data}, token: 'qwjlg1UjWin4MMTxaCy0Jw'})
 
   const combinedHeaders = headersData.reduce(
     (acc, item) => ({ ...acc, ...item }),
     {},
   );
-  const options = { method, headers: combinedHeaders };
+  const options = { method, headers: combinedHeaders, body  };
 
   return fetch(url, options)
     .then(checkStatus)

@@ -11,14 +11,16 @@ import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 
+import Header from 'components/Header';
 import Home from '../Home/Loadable';
 import Calendar from '../Calendar/Loadable';
+import Login from '../Login/Loadable';
+import Logout from '../Logout/Loadable';
 
-import Header from 'components/Header';
 import GlobalStyle from '../../global-styles';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "tabler-react/dist/Tabler.css";
-import '../../styles/styles.scss'
+import 'tabler-react/dist/Tabler.css';
+import '../../styles/styles.scss';
 
 const AppWrapper = styled.div`
   //max-width: calc(1264px + 16px * 2);
@@ -27,10 +29,7 @@ const AppWrapper = styled.div`
   min-height: 100%;
   //padding: 0 16px;
   flex-direction: column;
-`;
-
-const Content = styled.div`
-  //margin-top: 36px;
+  flex: 1 1 auto;
 `;
 
 export default function App() {
@@ -39,13 +38,13 @@ export default function App() {
       <Helmet titleTemplate="%s - Loomly">
         <meta name="description" content="" />
       </Helmet>
-      {/*<Header />*/}
-      <Content>
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/calendar" exact component={Calendar} />
-        </Switch>
-      </Content>
+      {/* <Header /> */}
+      <Switch>
+        <Route path="/" exact component={Login} />
+        <Route path="/home" exact component={Home} />
+        <Route path="/logout" exact component={Logout} />
+        <Route path="/calendar/:id?" exact component={Calendar} />
+      </Switch>
       <GlobalStyle />
     </AppWrapper>
   );

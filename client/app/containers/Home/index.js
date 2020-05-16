@@ -11,48 +11,72 @@ import reducer from './reducer';
 import saga from './saga';
 import LoadingIndicator from '../../components/LoadingIndicator';
 import 'react-toggle/style.css';
-import SiteWrapper from "../../components/SiteWrapper";
-import {Page} from "tabler-react";
-import { Calendar, Views, momentLocalizer } from 'react-big-calendar'
-import moment from 'moment'
-import 'react-big-calendar/lib/css/react-big-calendar.css'
+import SiteWrapper from '../Wrapper/SiteWrapper';
+import { Page } from 'tabler-react';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 const key = 'home';
-import * as dates from '../../../../cal/src/utils/dates'
-
 
 export function Home({ images, loading, fetchImages }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
   useEffect(() => {
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId: '2993796674014018',
+        cookie: true,
+        xfbml: true,
+        version: 'v2.5',
+      });
+    };
+
+    console.log('Loading fb api');
+    // Load the SDK asynchronously
+    (function(d, s, id) {
+      let js;
+      const fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = '//connect.facebook.net/en_US/sdk.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    })(document, 'script', 'facebook-jssdk');
   }, []);
 
-  const localizer = momentLocalizer(moment) // or globalizeLocalizer
-
-  let events;
-  events =
-    [
-      {
-        id: 0,
-        title: 'All Day Event very long title',
-        allDay: true,
-        start: new Date(),
-        end: new Date(),
-      },
-      {
-        id: 1,
-        title: 'Long Event',
-        start: new Date(2020, 3, 7),
-        end: new Date(2020, 3, 10),
-      }
-    ]
-
-    const ColoredDateCellWrapper = ({ children }) =>
-      React.cloneElement(React.Children.only(children), {
-        style: {
-          backgroundColor: 'lightblue',
-        },
-      })
+  const testAPI = () => {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log(`Successful login for: ${response.name}`, response);
+      FB.api('/113009247076006/accounts', function(response) {
+        console.log('----', response);
+      });
+    });
+  };
+  const statusChangeCallback = response => {
+    console.log('statusChangeCallback');
+    console.log(response);
+    if (response.status === 'connected') {
+      testAPI();
+    } else if (response.status === 'not_authorized') {
+      console.log('Please log into this app.');
+    } else {
+      console.log('Please log into this facebook.');
+      FB.login(statusChangeCallback, {
+        scope: 'pages_read_engagement,pages_manage_posts',
+      });
+    }
+  };
+  const checkLoginState = () => {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  };
+  const handleFBLogin = () => {
+    // FB.login(checkLoginState());
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  };
 
   return (
     <SiteWrapper>
@@ -61,11 +85,12 @@ export function Home({ images, loading, fetchImages }) {
           <title>Home Page</title>
           <meta name="description" content="Gallery" />
         </Helmet>
-        <div className='calendar'>
-         Home page
+        <div className="calendar">
+          Home page
+          <button className="btn btn-block btn-primary" onClick={handleFBLogin}>
+            FaceBook connect
+          </button>
         </div>
-
-
       </Page.Content>
     </SiteWrapper>
   );
@@ -77,9 +102,7 @@ Home.propTypes = {
   loading: PropTypes.bool,
 };
 
-const mapStateToProps = createStructuredSelector({
-
-});
+const mapStateToProps = createStructuredSelector({});
 
 export function mapDispatchToProps(dispatch) {
   return {
