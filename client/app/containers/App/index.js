@@ -14,6 +14,8 @@ import { Switch, Route } from 'react-router-dom';
 import Header from 'components/Header';
 import Home from '../Home/Loadable';
 import Calendar from '../Calendar/Loadable';
+import AddCalendar from '../AddCalendar/Loadable';
+
 import Login from '../Login/Loadable';
 import Logout from '../Logout/Loadable';
 
@@ -43,6 +45,7 @@ export default function App() {
         <Route path="/" exact component={Login} />
         <Route path="/home" exact component={Home} />
         <Route path="/logout" exact component={Logout} />
+        <Route path="/calendar/add" exact component={AddCalendar} />
         <Route path="/calendar/:id?" exact component={Calendar} />
       </Switch>
       <GlobalStyle />

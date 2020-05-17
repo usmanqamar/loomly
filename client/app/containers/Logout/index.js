@@ -8,21 +8,20 @@ import { createStructuredSelector } from 'reselect';
 import { withRouter } from 'react-router-dom';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
-import reducer from '../Login/reducer';
+import reducer from '../App/reducer';
 import saga from './saga';
 import 'react-toggle/style.css';
 import SiteWrapper from '../Wrapper/SiteWrapper';
 import LoginForm from '../../components/Login';
-import { logout } from '../Login/actions';
-import { makeSelectData } from '../Login/selectors';
+import { logout } from '../App/actions';
+import { makeSelectUser } from '../App/selectors';
 
 const key = 'user';
 
-export function Login({ doLogout, history }) {
-  useInjectReducer({ key, reducer });
+export function Logout({ doLogout, history }) {
   useInjectSaga({ key, saga });
 
-  const user = useSelector(makeSelectData());
+  const user = useSelector(makeSelectUser());
 
   useEffect(() => {
     if (!user) {
@@ -47,7 +46,7 @@ export function Login({ doLogout, history }) {
   );
 }
 
-Login.propTypes = {
+Logout.propTypes = {
   doLogout: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
 };
@@ -69,4 +68,4 @@ export default compose(
   withConnect,
   withRouter,
   memo,
-)(Login);
+)(Logout);

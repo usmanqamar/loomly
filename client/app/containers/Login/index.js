@@ -1,4 +1,4 @@
-import React, { useEffect, memo, useState } from 'react';
+import React, { useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import { Page } from 'tabler-react';
 import { Helmet } from 'react-helmet';
@@ -6,25 +6,22 @@ import { connect, useSelector } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { withRouter } from 'react-router-dom';
-import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
-import reducer from './reducer';
-import saga from './saga';
+import saga from '../App/saga';
 import 'react-toggle/style.css';
 import SiteWrapper from '../Wrapper/SiteWrapper';
-import { login } from './actions';
+import { login } from '../App/actions';
 import LoginForm from '../../components/Login';
-import { makeSelectData } from './selectors';
+import { makeSelectUser } from '../App/selectors';
 
 const key = 'user';
 
 export function Login({ doLogin, history }) {
-  useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
-  const user = useSelector(makeSelectData());
+  const user = useSelector(makeSelectUser());
 
   useEffect(() => {
-    console.log(user)
+    console.log(user);
     if (user) {
       history.push('/home');
     }

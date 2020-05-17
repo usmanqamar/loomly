@@ -5,3 +5,4 @@ export const ONCE_TILL_UNMOUNT = '@@saga-injector/once-till-unmount';
 // Use one of the constants to point to direct API vs express proxy
 export const API_BASE = 'https://app.fakejson.com/q';
 export const LOGIN_API = '';
+export const CALENDARS_LIST_API = '';

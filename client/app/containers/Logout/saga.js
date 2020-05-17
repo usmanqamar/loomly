@@ -1,6 +1,6 @@
 import { put, takeLatest } from 'redux-saga/effects';
-import { logoutSuccess } from '../Login/actions';
-import { LOGOUT } from '../Login/constants';
+import { logoutSuccess } from '../App/actions';
+import { LOGOUT } from '../App/constants';
 
 export function* userLogout() {
   // @TODO remove fake data

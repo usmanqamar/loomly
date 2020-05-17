@@ -11,66 +11,78 @@ import {
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { CopyRight } from '../../components/Footer';
-import { makeSelectData } from '../Login/selectors';
+import { makeSelectUser } from '../App/selectors';
+import {useEffect} from "react";
 let navBarItems = null;
 
 function SiteWrapper({ children }) {
   const state = {
     notificationsObjects: [],
   };
-  const user = useSelector(makeSelectData());
+  const [navbar, setNavbar] = React.useState(null);
+  const [accountDropdown, setAccountDropdown] = React.useState(null);
+  const user = useSelector(makeSelectUser());
   let accountDropdownProps;
-  if (user) {
-    navBarItems = [
-      {
-        value: 'Home',
-        to: '/home',
-        icon: 'home',
-        LinkComponent: withRouter(NavLink),
-        useExact: true,
-      },
-      {
-        value: 'Calendar',
-        icon: 'calendar',
-        to: '/calendar',
-        LinkComponent: withRouter(NavLink),
-      },
-      {
-        value: 'Logout',
-        icon: 'calendar',
-        to: '/logout',
-        LinkComponent: withRouter(NavLink),
-      },
-    ];
-    accountDropdownProps = {
-      name: `${user.firstName} ${user.lastName}`,
-      description: user.role,
-      options: [
+
+  useEffect(() => {
+    if (user) {
+      navBarItems = [
         {
-          icon: 'log-out',
-          value: 'Sign out',
-          to: '/logout',
-          RootComponent: withRouter(NavLink),
+          value: 'Home',
+          to: '/home',
+          icon: 'home',
+          LinkComponent: withRouter(NavLink),
+          useExact: true,
         },
-      ],
-    };
-  }
+        {
+          value: 'Calendar',
+          icon: 'calendar',
+          to: '/calendar',
+          LinkComponent: withRouter(NavLink),
+        },
+        {
+          value: 'Logout',
+          icon: 'calendar',
+          to: '/logout',
+          LinkComponent: withRouter(NavLink),
+        },
+      ];
+      accountDropdownProps = {
+        name: `${user.firstName} ${user.lastName}`,
+        description: user.role,
+        options: [
+          {
+            icon: 'log-out',
+            value: 'Sign out',
+            to: '/logout',
+            RootComponent: withRouter(NavLink),
+          },
+        ],
+      };
+
+      setAccountDropdown(accountDropdownProps)
+      setNavbar(navBarItems);
+    }
+
+  }, [user])
+
 
   const notificationsObjects = state.notificationsObjects || [];
   const unreadCount = state.notificationsObjects.reduce(
     (a, v) => a || v.unread,
     false,
   );
+
   return (
     <Site.Wrapper
       headerProps={{
-        to: '/',
+        href: '/',
         imageURL:
           'http://cdn.loomly.com/assets/marketing_pages/loomly-brand-success-platform-for-marketing-teams-logo-cd9a066997e18e1a6a9fe8999c91c2f2e47eda538efbfe3e4c0174f03c3d4d27.png',
         navItems: null,
-        accountDropdown: accountDropdownProps,
+        accountDropdown,
       }}
-      navProps={{ itemsObjects: navBarItems }}
+      navProps={{ itemsObjects: navbar }}
       routerContextComponentType={withRouter(RouterContextProvider)}
       footerProps={{
         links: [
