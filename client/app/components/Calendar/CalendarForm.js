@@ -38,7 +38,7 @@ const CalendarForm = ({ name, isEdit, onSubmit }) => (
           <Form.Group />
 
           <Button type="submit" color="primary">
-            {isEdit ? 'Save and Continue' : 'Save' }
+            {isEdit ? 'Save and Continue' : 'Save'}
           </Button>
         </Card.Body>
       </Form>

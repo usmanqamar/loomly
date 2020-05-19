@@ -6,6 +6,7 @@ import {
   FETCH_CALENDAR,
   FETCH_CALENDAR_SUCCESS,
   FETCH_CALENDAR_ERROR,
+  CLEAR_ADD_CALENDAR,
 } from './constants';
 
 // The initial state of the App
@@ -49,6 +50,13 @@ const addCalendarReducer = (state = initialState, action) =>
       case FETCH_CALENDAR_ERROR:
         draft.loading = false;
         draft.error = action.err;
+        draft.data = null;
+
+        break;
+
+      case CLEAR_ADD_CALENDAR:
+        draft.loading = false;
+        draft.error = null;
         draft.data = null;
 
         break;

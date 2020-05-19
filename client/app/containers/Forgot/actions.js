@@ -7,7 +7,7 @@ import {
 export function submitForgot(payload) {
   return {
     type: SUBMIT_FORGOT,
-    payload
+    payload,
   };
 }
 

@@ -1,23 +1,27 @@
 import React, { useEffect, memo, useState } from 'react';
-import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
+import { useParams, useHistory, withRouter } from 'react-router-dom';
+import { Page, Card, Alert } from 'tabler-react';
 import reducer from './reducer';
 import saga from './saga';
 import 'react-toggle/style.css';
 import SiteWrapper from '../Wrapper/SiteWrapper';
-import { useParams, useHistory, withRouter } from 'react-router-dom';
-import { Page, Card, Alert } from 'tabler-react';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import {addCalendar, loadCalendar} from './actions';
+import { addCalendar, clearAddCalendar, loadCalendar } from './actions';
 import CalendarForm from '../../components/Calendar/CalendarForm';
 import EditCalendar from '../../components/Calendar/EditCalendar';
 import { SocialFactory } from '../lib/SocialFactory';
-import { makeSelectData, makeSelectError } from './selectors';
+import {
+  makeSelectData,
+  makeSelectError,
+  makeSelectLoading,
+} from './selectors';
+import LoadingIndicator from '../../components/LoadingIndicator';
 
 const key = 'addCalendar';
 
@@ -29,14 +33,17 @@ export function AddCalendar() {
   const dispatch = useDispatch();
   const error = useSelector(makeSelectError());
   const data = useSelector(makeSelectData());
+  const loading = useSelector(makeSelectLoading());
 
   const { id } = params;
   const factory = new SocialFactory();
 
   const [socialAccounts, setSocialAccounts] = useState({ undefined: [] });
+
   useEffect(() => {
     if (data) {
       history.push(`/calendar/edit/${data.id}`);
+      dispatch(clearAddCalendar());
     }
   }, [data]);
 
@@ -62,7 +69,12 @@ export function AddCalendar() {
         <Helmet>
           <title>Calendar</title>
         </Helmet>
-        {error && <Alert type="danger">{error}</Alert>}
+        {loading && <LoadingIndicator />}
+        {error && (
+          <Alert type="danger">
+            Some error occurred loading calendar detail
+          </Alert>
+        )}
         {!id ? (
           <Card>
             <CalendarForm onSubmit={onUpdateName} />

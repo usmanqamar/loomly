@@ -16,8 +16,8 @@ export function* getCalendars() {
       {
         name: 'Second Calendar',
       },
-    ]
-  }
+    ],
+  };
 
   try {
     const calendars = yield call(request, requestURL, fake);

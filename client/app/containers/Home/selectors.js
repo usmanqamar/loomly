@@ -27,4 +27,10 @@ const makeSelectLoading = () =>
     home => home.loading,
   );
 
-export { selectHome, makeSelectData, makeSelectError, makeSelectLoading, makeSelectCalendars };
+export {
+  selectHome,
+  makeSelectData,
+  makeSelectError,
+  makeSelectLoading,
+  makeSelectCalendars,
+};

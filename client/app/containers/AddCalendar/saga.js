@@ -6,7 +6,12 @@ import {
   API_BASE,
   GET_CALENDAR_API,
 } from '../../utils/constants';
-import { calendarAdded, calendarAddingError, calendarLoaded } from './actions';
+import {
+  calendarAdded,
+  calendarAddingError,
+  calendarLoaded,
+  calendarLoadingError,
+} from './actions';
 import { calendarsLoadingError } from '../Home/actions';
 
 export function* addCalendar() {
@@ -36,7 +41,7 @@ export function* loadCalendar() {
     const calendar = yield call(request, requestURL, fake);
     yield put(calendarLoaded(calendar));
   } catch (err) {
-    yield put(calendarsLoadingError(err));
+    yield put(calendarLoadingError('some'));
   }
 }
 

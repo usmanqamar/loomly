@@ -1,18 +1,13 @@
 import * as React from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 
-import {
-  Site,
-  Grid,
-  List,
-  RouterContextProvider,
-} from 'tabler-react';
+import { Site, Grid, List, RouterContextProvider } from 'tabler-react';
 
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 import { CopyRight } from '../../components/Footer';
 import { makeSelectUser } from '../App/selectors';
-import {useEffect} from "react";
 let navBarItems = null;
 
 function SiteWrapper({ children }) {
@@ -39,7 +34,7 @@ function SiteWrapper({ children }) {
           icon: 'calendar',
           to: '/calendar',
           LinkComponent: withRouter(NavLink),
-        }
+        },
       ];
       accountDropdownProps = {
         name: `${user.firstName} ${user.lastName}`,
@@ -54,11 +49,10 @@ function SiteWrapper({ children }) {
         ],
       };
 
-      setAccountDropdown(accountDropdownProps)
+      setAccountDropdown(accountDropdownProps);
       setNavbar(navBarItems);
     }
-  }, [user])
-
+  }, [user]);
 
   const notificationsObjects = state.notificationsObjects || [];
   const unreadCount = state.notificationsObjects.reduce(
