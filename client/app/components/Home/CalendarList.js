@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Card, Button, Icon, Alert } from 'tabler-react';
 import { Link, NavLink } from 'react-router-dom';
 
-
 const CalendarList = ({ calendars }) => (
   <Card>
     <Card.Header>

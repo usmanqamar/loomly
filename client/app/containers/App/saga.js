@@ -5,6 +5,7 @@ import { API_BASE, LOGIN_API } from '../../utils/constants';
 import { loginFailure, loginSuccess } from './actions';
 
 export function* userLogin({ payload }) {
+  // eslint-disable-next-line no-unused-vars
   const { user, password } = payload;
 
   const requestURL = `${API_BASE}${LOGIN_API}`;

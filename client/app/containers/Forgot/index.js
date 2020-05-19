@@ -20,7 +20,7 @@ import { useInjectReducer } from '../../utils/injectReducer';
 
 const key = 'forgot';
 
-export function Forgot({ doSubmit, history }) {
+export function Forgot({ doSubmit }) {
   useInjectSaga({ key, saga });
   useInjectReducer({ key, reducer });
   const error = useSelector(makeSelectError());
@@ -57,7 +57,6 @@ export function Forgot({ doSubmit, history }) {
 
 Forgot.propTypes = {
   doSubmit: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({});

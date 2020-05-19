@@ -1,8 +1,7 @@
 import React, { useEffect, memo, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { compose } from 'redux';
-import { createStructuredSelector } from 'reselect';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useParams, useHistory, withRouter } from 'react-router-dom';
@@ -15,7 +14,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { addCalendar, clearAddCalendar, loadCalendar } from './actions';
 import CalendarForm from '../../components/Calendar/CalendarForm';
 import EditCalendar from '../../components/Calendar/EditCalendar';
-import { SocialFactory } from '../lib/SocialFactory';
+import { SocialFactory } from '../../lib/SocialFactory';
 import {
   makeSelectData,
   makeSelectError,
@@ -91,21 +90,18 @@ export function AddCalendar() {
   );
 }
 
-const mapStateToProps = createStructuredSelector({});
-
-export function mapDispatchToProps(dispatch) {
-  return {
-    saveCalendar: () => dispatch(addCalendar()),
-  };
-}
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+// const mapStateToProps = createStructuredSelector({});
+//
+// export function mapDispatchToProps(dispatch) {
+//   return {};
+// }
+//
+// const withConnect = connect(
+//   mapStateToProps,
+//   mapDispatchToProps,
+// );
 
 export default compose(
-  withConnect,
   withRouter,
   memo,
 )(AddCalendar);

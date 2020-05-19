@@ -38,7 +38,7 @@ export default function configureStore(initialState = {}, history) {
 
   const store = createStore(
     createReducer(),
-    { test: '' },
+    initialState,
     composeEnhancers(...enhancers),
   );
 

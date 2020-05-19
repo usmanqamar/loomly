@@ -7,11 +7,12 @@ import { createStructuredSelector } from 'reselect';
 import { withRouter } from 'react-router-dom';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
+import { Page, Grid } from 'tabler-react';
+
 import reducer from './reducer';
 import saga from './saga';
 import 'react-toggle/style.css';
 import SiteWrapper from '../Wrapper/SiteWrapper';
-import { Page, Grid } from 'tabler-react';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { loadCalendars } from './actions';
 import { makeSelectCalendars } from './selectors';

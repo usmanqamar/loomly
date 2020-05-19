@@ -52,6 +52,7 @@ FaceBook.propTypes = {
   handleLogin: PropTypes.func.isRequired,
   pages: PropTypes.array,
   type: PropTypes.string.isRequired,
+  isConnected: PropTypes.bool.isRequired,
 };
 
 export default FaceBook;

@@ -1,4 +1,4 @@
-import React, { useEffect, memo, useState } from 'react';
+import React, { useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
@@ -7,19 +7,18 @@ import { createStructuredSelector } from 'reselect';
 import { withRouter } from 'react-router-dom';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
+import { Page } from 'tabler-react';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
+import moment from 'moment';
 import reducer from './reducer';
 import saga from './saga';
-import LoadingIndicator from '../../components/LoadingIndicator';
 import 'react-toggle/style.css';
 import SiteWrapper from '../Wrapper/SiteWrapper';
-import { Page } from 'tabler-react';
-import { Calendar, Views, momentLocalizer } from 'react-big-calendar';
-import moment from 'moment';
+
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import * as dates from '../../../../cal/src/utils/dates';
 const key = 'home';
 
-export function CalendarContainer({ images, loading, fetchImages }) {
+export function CalendarContainer() {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
@@ -27,8 +26,7 @@ export function CalendarContainer({ images, loading, fetchImages }) {
 
   const localizer = momentLocalizer(moment); // or globalizeLocalizer
 
-  let events;
-  events = [
+  const events = [
     {
       id: 0,
       title: 'All Day Event very long title',
@@ -77,10 +75,8 @@ Calendar.propTypes = {
 
 const mapStateToProps = createStructuredSelector({});
 
-export function mapDispatchToProps(dispatch) {
-  return {
-    fetchImages: payload => dispatch(loadImages(payload)),
-  };
+export function mapDispatchToProps() {
+  return {};
 }
 
 const withConnect = connect(

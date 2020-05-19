@@ -5,21 +5,17 @@ import { Site, Grid, List, RouterContextProvider } from 'tabler-react';
 
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
 import { CopyRight } from '../../components/Footer';
 import { makeSelectUser } from '../App/selectors';
 let navBarItems = null;
 
 function SiteWrapper({ children }) {
-  const state = {
-    notificationsObjects: [],
-  };
   const [navbar, setNavbar] = React.useState(null);
   const [accountDropdown, setAccountDropdown] = React.useState(null);
   const user = useSelector(makeSelectUser());
   let accountDropdownProps;
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (user) {
       navBarItems = [
         {
@@ -54,12 +50,6 @@ function SiteWrapper({ children }) {
     }
   }, [user]);
 
-  const notificationsObjects = state.notificationsObjects || [];
-  const unreadCount = state.notificationsObjects.reduce(
-    (a, v) => a || v.unread,
-    false,
-  );
-
   return (
     <Site.Wrapper
       headerProps={{
@@ -72,17 +62,7 @@ function SiteWrapper({ children }) {
       navProps={{ itemsObjects: navbar }}
       routerContextComponentType={withRouter(RouterContextProvider)}
       footerProps={{
-        links: [
-          <a href="">First Link</a>,
-          <a href="#">Second Link</a>,
-          <a href="#">Third Link</a>,
-          <a href="#">Fourth Link</a>,
-          <a href="#">Five Link</a>,
-          <a href="#">Sixth Link</a>,
-          <a href="#">Seventh Link</a>,
-          <a href="#">Eigth Link</a>,
-          <a href="">nin Link</a>,
-        ],
+        links: [<a href="/">First Link</a>],
         note: '',
         copyright: <CopyRight />,
         nav: (

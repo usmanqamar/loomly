@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Form, Button, Icon, Alert } from 'tabler-react';
-import { Formik } from 'formik';
-import { NavLink } from 'react-router-dom';
+import { Card, Icon } from 'tabler-react';
 
-const PostOverview = ({ calendars }) => (
+const PostOverview = () => (
   <Card>
     <Card.Header>
       <Card.Title>
@@ -16,8 +14,8 @@ const PostOverview = ({ calendars }) => (
   </Card>
 );
 
-PostOverview.propTypes = {
-  calendars: PropTypes.func.isRequired,
-};
+// PostOverview.propTypes = {
+//   calendars: PropTypes.func.isRequired,
+// };
 
 export default PostOverview;

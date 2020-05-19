@@ -5,7 +5,6 @@
  *
  * @return {object}          The parsed JSON from the request
  */
-import { CLIENT_ID } from '../config';
 
 function parseJSON(response) {
   if (response.status === 204 || response.status === 205) {

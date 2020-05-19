@@ -12,7 +12,6 @@ import {
   calendarLoaded,
   calendarLoadingError,
 } from './actions';
-import { calendarsLoadingError } from '../Home/actions';
 
 export function* addCalendar() {
   const requestURL = `${API_BASE}${ADD_CALENDAR_API}`;
@@ -41,7 +40,7 @@ export function* loadCalendar() {
     const calendar = yield call(request, requestURL, fake);
     yield put(calendarLoaded(calendar));
   } catch (err) {
-    yield put(calendarLoadingError('some'));
+    yield put(calendarLoadingError(err));
   }
 }
 

@@ -48,6 +48,8 @@ const CalendarForm = ({ name, isEdit, onSubmit }) => (
 
 CalendarForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  isEdit: PropTypes.bool.isRequired,
 };
 
 export default CalendarForm;

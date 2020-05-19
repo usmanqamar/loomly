@@ -1,6 +1,5 @@
-import { FB_APP_ID } from '../../utils/constants';
+import { FB_APP_ID } from '../utils/constants';
 
-/* global FB */
 export class Facebook {
   constructor() {
     // new Promise(async resolve => {

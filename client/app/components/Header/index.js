@@ -2,13 +2,12 @@ import React from 'react';
 // import Navbar from 'react-bootstrap/Navbar';
 // import Nav from 'react-bootstrap/Nav';
 
-import { Card, Button, Header as Head, Nav, Site } from 'tabler-react';
+import { Nav, Site } from 'tabler-react';
 
 const Header = () => (
   <>
     <Site
       href="asdasdas.co"
-      children={<h1>aaaaaa</h1>}
       navItems={
         <Nav>
           <Nav.Item hasSubNav value="Page One" icon="globe" />
