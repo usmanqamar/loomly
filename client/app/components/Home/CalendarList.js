@@ -14,7 +14,7 @@ const CalendarList = ({ calendars }) => (
     </Card.Header>
     <Card.Body>
       <Card.Title>
-        <Button pill color="secondary blue" icon="plus">
+        <Button href='/calendar/add' RootComponent='a' pill color="secondary blue" icon="plus">
           Add new calendar
         </Button>
       </Card.Title>

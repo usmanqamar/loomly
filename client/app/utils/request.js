@@ -46,13 +46,16 @@ export default function request(url, data, method = 'POST', headers) {
   });
 
   // @TODO
-  const body = JSON.stringify({data: {...data}, token: 'qwjlg1UjWin4MMTxaCy0Jw'})
+  const body = JSON.stringify({
+    data: { ...data },
+    token: 'qwjlg1UjWin4MMTxaCy0Jw',
+  });
 
   const combinedHeaders = headersData.reduce(
     (acc, item) => ({ ...acc, ...item }),
     {},
   );
-  const options = { method, headers: combinedHeaders, body  };
+  const options = { method, headers: combinedHeaders, body };
 
   return fetch(url, options)
     .then(checkStatus)

@@ -11,13 +11,13 @@ import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 
-import Header from 'components/Header';
 import Home from '../Home/Loadable';
 import Calendar from '../Calendar/Loadable';
 import AddCalendar from '../AddCalendar/Loadable';
 
 import Login from '../Login/Loadable';
 import Logout from '../Logout/Loadable';
+import Forgot from '../Forgot/Loadable';
 
 import GlobalStyle from '../../global-styles';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -45,7 +45,10 @@ export default function App() {
         <Route path="/" exact component={Login} />
         <Route path="/home" exact component={Home} />
         <Route path="/logout" exact component={Logout} />
+        <Route path="/forgot" exact component={Forgot} />
+
         <Route path="/calendar/add" exact component={AddCalendar} />
+        <Route path="/calendar/edit/:id" exact component={AddCalendar} />
         <Route path="/calendar/:id?" exact component={Calendar} />
       </Switch>
       <GlobalStyle />
