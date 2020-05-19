@@ -1,18 +1,12 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const selectHome = state => state.home || initialState;
+const selectHome = state => state.addCalendar || initialState;
 
 const makeSelectData = () =>
   createSelector(
     selectHome,
     home => home.data,
-  );
-
-const makeSelectCalendars = () =>
-  createSelector(
-    makeSelectData(),
-    data => data.calendars,
   );
 
 const makeSelectError = () =>
@@ -27,4 +21,4 @@ const makeSelectLoading = () =>
     home => home.loading,
   );
 
-export { selectHome, makeSelectData, makeSelectError, makeSelectLoading, makeSelectCalendars };
+export { selectHome, makeSelectData, makeSelectError, makeSelectLoading };

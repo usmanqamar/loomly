@@ -1,39 +1,58 @@
 import produce from 'immer';
 import {
-  FETCH_CALENDARS_SUCCESS,
-  FETCH_CALENDARS_ERROR,
-  FETCH_CALENDARS,
+  ADD_CALENDAR_SUCCESS,
+  ADD_CALENDAR_ERROR,
+  ADD_CALENDAR,
+  FETCH_CALENDAR,
+  FETCH_CALENDAR_SUCCESS,
+  FETCH_CALENDAR_ERROR,
 } from './constants';
 
 // The initial state of the App
 export const initialState = {
   loading: false,
   error: null,
-  data: {
-    calendars: [],
-  },
+  data: null,
 };
 
 /* eslint-disable default-case, no-param-reassign */
-const homeReducer = (state = initialState, action) =>
+const addCalendarReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case FETCH_CALENDARS:
+      case ADD_CALENDAR:
         draft.loading = true;
         break;
 
-      case FETCH_CALENDARS_SUCCESS:
+      case ADD_CALENDAR_SUCCESS:
         draft.loading = false;
-        draft.data = { ...draft.data, calendars: action.payload };
         draft.error = null;
+        draft.data = action.payload;
         break;
 
-      case FETCH_CALENDARS_ERROR:
+      case ADD_CALENDAR_ERROR:
         draft.loading = false;
         draft.error = action.err;
-        draft.data = { ...draft.data, calendars: [] };
+        draft.data = null;
+
+        break;
+
+      case FETCH_CALENDAR:
+        draft.loading = true;
+        break;
+
+      case FETCH_CALENDAR_SUCCESS:
+        draft.loading = false;
+        draft.error = null;
+        draft.data = action.payload;
+        break;
+
+      case FETCH_CALENDAR_ERROR:
+        draft.loading = false;
+        draft.error = action.err;
+        draft.data = null;
+
         break;
     }
   });
 
-export default homeReducer;
+export default addCalendarReducer;

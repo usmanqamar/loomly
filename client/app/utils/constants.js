@@ -7,3 +7,5 @@ export const API_BASE = 'https://app.fakejson.com/q';
 export const LOGIN_API = '';
 export const CALENDARS_LIST_API = '';
 export const FORGOT_API = '';
+export const ADD_CALENDAR_API = '';
+export const GET_CALENDAR_API = '';

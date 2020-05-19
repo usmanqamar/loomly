@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Card, Form, Button } from 'tabler-react';
 import { Formik } from 'formik';
 
-const NewCalendar = ({ name, onSubmit }) => (
+const CalendarForm = ({ name, isEdit, onSubmit }) => (
   <Formik
     initialValues={{
       name,
@@ -38,7 +38,7 @@ const NewCalendar = ({ name, onSubmit }) => (
           <Form.Group />
 
           <Button type="submit" color="primary">
-            Save and Continue
+            {isEdit ? 'Save and Continue' : 'Save' }
           </Button>
         </Card.Body>
       </Form>
@@ -46,8 +46,8 @@ const NewCalendar = ({ name, onSubmit }) => (
   />
 );
 
-NewCalendar.propTypes = {
+CalendarForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
 
-export default NewCalendar;
+export default CalendarForm;

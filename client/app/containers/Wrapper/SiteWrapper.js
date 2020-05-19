@@ -39,13 +39,7 @@ function SiteWrapper({ children }) {
           icon: 'calendar',
           to: '/calendar',
           LinkComponent: withRouter(NavLink),
-        },
-        {
-          value: 'Logout',
-          icon: 'calendar',
-          to: '/logout',
-          LinkComponent: withRouter(NavLink),
-        },
+        }
       ];
       accountDropdownProps = {
         name: `${user.firstName} ${user.lastName}`,
@@ -63,7 +57,6 @@ function SiteWrapper({ children }) {
       setAccountDropdown(accountDropdownProps)
       setNavbar(navBarItems);
     }
-
   }, [user])
 
 

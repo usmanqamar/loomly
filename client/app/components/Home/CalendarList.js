@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Form, Button, Icon, Alert } from 'tabler-react';
-import { Formik } from 'formik';
-import { NavLink } from 'react-router-dom';
+import { Card, Button, Icon, Alert } from 'tabler-react';
+import { Link, NavLink } from 'react-router-dom';
 
 const CalendarList = ({ calendars }) => (
   <Card>
@@ -14,7 +13,13 @@ const CalendarList = ({ calendars }) => (
     </Card.Header>
     <Card.Body>
       <Card.Title>
-        <Button href='/calendar/add' RootComponent='a' pill color="secondary blue" icon="plus">
+        <Button
+          to="/calendar/add"
+          RootComponent={Link}
+          pill
+          color="secondary blue"
+          icon="plus"
+        >
           Add new calendar
         </Button>
       </Card.Title>

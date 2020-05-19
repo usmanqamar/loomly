@@ -1,25 +1,49 @@
 import {
-  FETCH_CALENDARS,
-  FETCH_CALENDARS_ERROR,
-  FETCH_CALENDARS_SUCCESS,
+  FETCH_CALENDAR,
+  FETCH_CALENDAR_ERROR,
+  FETCH_CALENDAR_SUCCESS,
+  ADD_CALENDAR,
+  ADD_CALENDAR_ERROR,
+  ADD_CALENDAR_SUCCESS
 } from './constants';
 
-export function loadCalendars() {
+export function addCalendar(payload) {
   return {
-    type: FETCH_CALENDARS,
-  };
-}
-
-export function calendarsLoaded(payload) {
-  return {
-    type: FETCH_CALENDARS_SUCCESS,
+    type: ADD_CALENDAR,
     payload,
   };
 }
 
-export function calendarsLoadingError(err) {
+export function calendarAdded(payload) {
   return {
-    type: FETCH_CALENDARS_ERROR,
+    type: ADD_CALENDAR_SUCCESS,
+    payload,
+  };
+}
+
+export function calendarAddingError(err) {
+  return {
+    type: ADD_CALENDAR_ERROR,
+    err,
+  };
+}
+
+export function loadCalendar() {
+  return {
+    type: FETCH_CALENDAR,
+  };
+}
+
+export function calendarLoaded(payload) {
+  return {
+    type: FETCH_CALENDAR_SUCCESS,
+    payload,
+  };
+}
+
+export function calendarLoadingError(err) {
+  return {
+    type: FETCH_CALENDAR_ERROR,
     err,
   };
 }
