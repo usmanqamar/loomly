@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { CopyRight } from '../../components/Footer';
 import { makeSelectUser } from '../App/selectors';
+import logo from '../../images/logo.png'
 let navBarItems = null;
 
 function SiteWrapper({ children }) {
@@ -54,8 +55,7 @@ function SiteWrapper({ children }) {
     <Site.Wrapper
       headerProps={{
         href: '/',
-        imageURL:
-          'http://cdn.loomly.com/assets/marketing_pages/loomly-brand-success-platform-for-marketing-teams-logo-cd9a066997e18e1a6a9fe8999c91c2f2e47eda538efbfe3e4c0174f03c3d4d27.png',
+        imageURL: logo,
         navItems: null,
         accountDropdown,
       }}
@@ -70,7 +70,8 @@ function SiteWrapper({ children }) {
             <Grid.Col auto>
               <List className="list-inline list-inline-dots mb-0">
                 <List.Item className="list-inline-item">
-                  <a href="./docs/index.html">Documentation</a>
+                  <a href="./docs/index.html">Documentation
+                  </a>
                 </List.Item>
                 <List.Item className="list-inline-item">
                   <a href="./faq.html">FAQ</a>

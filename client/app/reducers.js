@@ -12,10 +12,16 @@ const persistConfig = {
   blacklist: ['router'],
   stateReconciler: autoMergeLevel2,
 };
+const globalConfig = {
+  key: 'global',
+  storage,
+  blacklist: ['error'],
+  stateReconciler: autoMergeLevel2,
+};
 export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
     router: connectRouter(history),
-    global: globalReducer,
+    global: persistReducer(globalConfig, globalReducer),
     ...injectedReducers,
   });
 

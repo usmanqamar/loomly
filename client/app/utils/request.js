@@ -56,6 +56,7 @@ export default function request(url, data, method = 'POST', headers) {
   );
   const options = { method, headers: combinedHeaders, body };
 
+  console.log(url, options)
   return fetch(url, options)
     .then(checkStatus)
     .then(parseJSON);

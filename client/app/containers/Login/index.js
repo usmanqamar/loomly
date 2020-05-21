@@ -1,6 +1,6 @@
 import React, { useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
-import { Page } from 'tabler-react';
+import { Alert, Page } from 'tabler-react';
 import { Helmet } from 'react-helmet';
 import { connect, useSelector } from 'react-redux';
 import { compose } from 'redux';
@@ -12,16 +12,16 @@ import 'react-toggle/style.css';
 import SiteWrapper from '../Wrapper/SiteWrapper';
 import { login } from '../App/actions';
 import LoginForm from '../../components/Login';
-import { makeSelectUser } from '../App/selectors';
+import { makeSelectError, makeSelectUser } from '../App/selectors';
 
 const key = 'user';
 
 export function Login({ doLogin, history }) {
   useInjectSaga({ key, saga });
   const user = useSelector(makeSelectUser());
+  const error = useSelector(makeSelectError());
 
   useEffect(() => {
-    console.log(user);
     if (user) {
       history.push('/home');
     }
@@ -35,6 +35,7 @@ export function Login({ doLogin, history }) {
           <meta name="description" content="Gallery" />
         </Helmet>
 
+        {error && <Alert type="danger">{error}</Alert>}
         <div className="mx-auto col-login">
           <LoginForm onSubmit={doLogin} />
         </div>
