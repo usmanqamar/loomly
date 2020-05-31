@@ -31,7 +31,7 @@ const globalReducer = (state = initialState, action) =>
 
       case LOGIN_FAILURE:
         draft.loading = false;
-        draft.error = 'Error'//action.err;
+        draft.error = 'Error'; // action.err;
         draft.user = null;
         break;
 

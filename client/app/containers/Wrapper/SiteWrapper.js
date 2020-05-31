@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { CopyRight } from '../../components/Footer';
 import { makeSelectUser } from '../App/selectors';
-import logo from '../../images/logo.png'
+import logo from '../../images/logo.png';
 let navBarItems = null;
 
 function SiteWrapper({ children }) {
@@ -70,8 +70,7 @@ function SiteWrapper({ children }) {
             <Grid.Col auto>
               <List className="list-inline list-inline-dots mb-0">
                 <List.Item className="list-inline-item">
-                  <a href="./docs/index.html">Documentation
-                  </a>
+                  <a href="./docs/index.html">Documentation</a>
                 </List.Item>
                 <List.Item className="list-inline-item">
                   <a href="./faq.html">FAQ</a>
