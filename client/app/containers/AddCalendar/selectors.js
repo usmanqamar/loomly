@@ -1,12 +1,30 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const selectHome = state => state.addCalendar || initialState;
+const selectHome = state => state.calendarForm || initialState;
 
-const makeSelectData = () =>
+const makeSelectAddForm = () =>
   createSelector(
     selectHome,
-    home => home.data,
+    home => home.addForm,
+  );
+
+const makeSelectEditForm = () =>
+  createSelector(
+    selectHome,
+    home => home.editForm,
+  );
+
+const makeSelectAddFormData = () =>
+  createSelector(
+    makeSelectAddForm(),
+    form => form.data,
+  );
+
+const makeSelectEditFormData = () =>
+  createSelector(
+    makeSelectEditForm(),
+    form => form.data,
   );
 
 const makeSelectError = () =>
@@ -21,4 +39,10 @@ const makeSelectLoading = () =>
     home => home.loading,
   );
 
-export { selectHome, makeSelectData, makeSelectError, makeSelectLoading };
+export {
+  selectHome,
+  makeSelectAddFormData,
+  makeSelectEditFormData,
+  makeSelectError,
+  makeSelectLoading,
+};

@@ -4,7 +4,14 @@ import { Form, Button, Grid, Container } from 'tabler-react';
 
 import { SocialIcon } from 'react-social-icons';
 
-const FaceBook = ({ isConnected, type, pages, handleLogin }) => (
+const Account = ({
+  isConnected,
+  type,
+  pages,
+  handleLogin,
+  onSelect,
+  onSaveConnection,
+}) => (
   <Container>
     <Grid.Row className="justify-content-around align-items-center">
       <Grid.Col>
@@ -15,15 +22,20 @@ const FaceBook = ({ isConnected, type, pages, handleLogin }) => (
         <Grid.Col>
           <Grid.Row className="justify-content-end">
             <Grid.Col sm={9}>
-              <Form.Select onChange={() => alert('')}>
+              <Form.Select onChange={onSelect}>
                 <option value="">Select</option>
                 {pages.map(page => (
-                  <option value={page}>{page.name}</option>
+                  <option value={page.id}>{page.name}</option>
                 ))}
               </Form.Select>
             </Grid.Col>
             <Grid.Col sm={3} className="text-right">
-              <Button block pill color="primary" onClick={handleLogin}>
+              <Button
+                block
+                pill
+                color="primary"
+                onClick={onSaveConnection}
+              >
                 Save
               </Button>
             </Grid.Col>
@@ -45,14 +57,16 @@ const FaceBook = ({ isConnected, type, pages, handleLogin }) => (
     </Grid.Row>
   </Container>
 );
-FaceBook.defaultProps = {
+Account.defaultProps = {
   pages: [],
 };
-FaceBook.propTypes = {
+Account.propTypes = {
   handleLogin: PropTypes.func.isRequired,
+  onSelect: PropTypes.func.isRequired,
   pages: PropTypes.array,
   type: PropTypes.string.isRequired,
   isConnected: PropTypes.bool.isRequired,
+  onSaveConnection: PropTypes.func.isRequired,
 };
 
-export default FaceBook;
+export default Account;

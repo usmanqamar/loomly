@@ -2,20 +2,17 @@ import { FB_APP_ID } from '../utils/constants';
 
 export class Facebook {
   constructor() {
-    // new Promise(async resolve => {
-    //
-    // });
-    (async function(that) {
-      const FB = await that.getScript();
+    new Promise(async resolve => {
+      const FB = await this.getScript();
       FB.init({
         appId: FB_APP_ID,
         cookie: true,
         xfbml: true,
         version: 'v2.5',
       });
-    })(this);
-
-    // resolve(FB);
+      window.FB = FB
+      resolve(FB);
+    });
   }
 
   getScript() {
@@ -42,8 +39,6 @@ export class Facebook {
           Frictionless: window.FB.Frictionless,
           XFBML: window.FB.XFBML,
         });
-
-        // console.log(this);
 
         resolve(window.FB);
       });

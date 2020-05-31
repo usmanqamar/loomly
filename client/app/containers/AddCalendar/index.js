@@ -11,18 +11,25 @@ import saga from './saga';
 import 'react-toggle/style.css';
 import SiteWrapper from '../Wrapper/SiteWrapper';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import { addCalendar, clearAddCalendar, loadCalendar } from './actions';
+import {
+  addCalendar,
+  clearAddCalendar,
+  connectAccount,
+  inviteUser,
+  loadCalendar,
+} from './actions';
 import CalendarForm from '../../components/Calendar/CalendarForm';
 import EditCalendar from '../../components/Calendar/EditCalendar';
 import { SocialFactory } from '../../lib/SocialFactory';
 import {
-  makeSelectData,
+  makeSelectAddFormData,
+  makeSelectEditFormData,
   makeSelectError,
   makeSelectLoading,
 } from './selectors';
 import LoadingIndicator from '../../components/LoadingIndicator';
 
-const key = 'addCalendar';
+const key = 'calendarForm';
 
 export function AddCalendar() {
   useInjectReducer({ key, reducer });
@@ -31,20 +38,22 @@ export function AddCalendar() {
   const params = useParams();
   const dispatch = useDispatch();
   const error = useSelector(makeSelectError());
-  const data = useSelector(makeSelectData());
+  const addData = useSelector(makeSelectAddFormData());
+  const calendarData = useSelector(makeSelectEditFormData());
   const loading = useSelector(makeSelectLoading());
 
   const { id } = params;
   const factory = new SocialFactory();
 
   const [socialAccounts, setSocialAccounts] = useState({ undefined: [] });
+  const [selectedPage, setSelectedPage] = useState(null);
 
   useEffect(() => {
-    if (data) {
-      history.push(`/calendar/edit/${data.id}`);
+    if (addData) {
+      history.push(`/calendar/edit/${addData.id}`);
       dispatch(clearAddCalendar());
     }
-  }, [data]);
+  }, [addData]);
 
   useEffect(() => {
     if (id) {
@@ -54,6 +63,23 @@ export function AddCalendar() {
 
   const onUpdateName = () => {
     dispatch(addCalendar());
+  };
+
+  const onSelectPage = ({ target: { value } }) => {
+    setSelectedPage(value);
+  };
+
+  const onSaveConnection = account => {
+    const payload = {
+      [account]: {
+        pageId: selectedPage,
+      },
+    };
+    dispatch(connectAccount(payload));
+  };
+
+  const onSaveUser = payload => {
+    dispatch(inviteUser(payload));
   };
 
   const handleLogin = async type => {
@@ -81,25 +107,18 @@ export function AddCalendar() {
         ) : (
           <EditCalendar
             onSubmit={onUpdateName}
+            calendarData={calendarData}
             accounts={socialAccounts}
             handleLogin={handleLogin}
+            onSelect={onSelectPage}
+            onSaveConnection={onSaveConnection}
+            onSaveUser={onSaveUser}
           />
         )}
       </Page.Content>
     </SiteWrapper>
   );
 }
-
-// const mapStateToProps = createStructuredSelector({});
-//
-// export function mapDispatchToProps(dispatch) {
-//   return {};
-// }
-//
-// const withConnect = connect(
-//   mapStateToProps,
-//   mapDispatchToProps,
-// );
 
 export default compose(
   withRouter,

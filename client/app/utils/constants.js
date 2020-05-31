@@ -11,3 +11,5 @@ export const CALENDARS_LIST_API = '';
 export const FORGOT_API = '';
 export const ADD_CALENDAR_API = '';
 export const GET_CALENDAR_API = '';
+export const EDIT_CALENDAR_API = '';
+export const INVITE_USER_API = '';

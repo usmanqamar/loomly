@@ -7,13 +7,27 @@ import {
   FETCH_CALENDAR_SUCCESS,
   FETCH_CALENDAR_ERROR,
   CLEAR_ADD_CALENDAR,
+  INVITE_USER,
+  INVITE_USER_SUCCESS,
+  INVITE_USER_FAILURE,
 } from './constants';
 
 // The initial state of the App
 export const initialState = {
   loading: false,
   error: null,
-  data: null,
+  addForm: {
+    data: null,
+  },
+  editForm: {
+    data: {
+      users: [],
+      name: '',
+    },
+  },
+  users: {
+    data: null,
+  },
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -27,13 +41,13 @@ const addCalendarReducer = (state = initialState, action) =>
       case ADD_CALENDAR_SUCCESS:
         draft.loading = false;
         draft.error = null;
-        draft.data = action.payload;
+        draft.addForm = { data: action.payload };
         break;
 
       case ADD_CALENDAR_ERROR:
         draft.loading = false;
         draft.error = action.err;
-        draft.data = null;
+        draft.addForm = { data: null };
 
         break;
 
@@ -44,20 +58,37 @@ const addCalendarReducer = (state = initialState, action) =>
       case FETCH_CALENDAR_SUCCESS:
         draft.loading = false;
         draft.error = null;
-        draft.data = action.payload;
+        draft.editForm = { data: action.payload };
         break;
 
       case FETCH_CALENDAR_ERROR:
         draft.loading = false;
         draft.error = action.err;
-        draft.data = null;
+        draft.calendar = { data: null };
 
         break;
 
       case CLEAR_ADD_CALENDAR:
         draft.loading = false;
         draft.error = null;
-        draft.data = null;
+        draft.addForm = { data: null };
+
+        break;
+
+      case INVITE_USER:
+        draft.loading = true;
+        break;
+
+      case INVITE_USER_SUCCESS:
+        draft.loading = false;
+        draft.error = null;
+        draft.users = { data: action.payload };
+        break;
+
+      case INVITE_USER_FAILURE:
+        draft.loading = false;
+        draft.error = action.err;
+        draft.users = { data: action.payload };
 
         break;
     }

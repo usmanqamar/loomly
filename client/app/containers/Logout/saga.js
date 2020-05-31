@@ -3,13 +3,9 @@ import { logoutSuccess } from '../App/actions';
 import { LOGOUT } from '../App/constants';
 
 export function* userLogout() {
-  // @TODO remove fake data
-
   try {
     yield put(logoutSuccess());
-  } catch (err) {
-    // yield put(loginFailure(err));
-  }
+  } catch (err) {}
 }
 
 /**

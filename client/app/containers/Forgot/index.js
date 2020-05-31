@@ -41,7 +41,7 @@ export function Forgot({ doSubmit }) {
           <Alert type="danger">We didnt find this user in our system</Alert>
         )}
 
-        {error !== null && (
+        {error === false && (
           <Alert type="success">
             Request submitted. Please check your inbox
           </Alert>
