@@ -30,12 +30,7 @@ const Account = ({
               </Form.Select>
             </Grid.Col>
             <Grid.Col sm={3} className="text-right">
-              <Button
-                block
-                pill
-                color="primary"
-                onClick={onSaveConnection}
-              >
+              <Button block pill color="primary" onClick={onSaveConnection}>
                 Save
               </Button>
             </Grid.Col>

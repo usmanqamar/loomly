@@ -18,8 +18,8 @@ export function* userLogin({ payload }) {
     role: 'SuperAdmin',
   };
   try {
-    const images = yield call(request, requestURL, fake);
-    yield put(loginSuccess(images));
+    const posts = yield call(request, requestURL, fake);
+    yield put(loginSuccess(posts));
   } catch (err) {
     yield put(loginFailure(err));
   }

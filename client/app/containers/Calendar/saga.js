@@ -1,25 +1,22 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import request from 'utils/request';
-import { FETCH_IMAGES } from './constants';
-import { API_BASE } from '../../utils/constants';
-import { imagesLoaded, imagesLoadingError } from './actions';
+import { FETCH_POSTS} from './constants';
+import {API_BASE, GET_CALENDAR_POSTS} from '../../utils/constants';
+import { postsLoaded, postsLoadingError } from './actions';
 
-export function* getImages({ payload }) {
-  const { section, sort, window, isViral } = payload;
+export function* getPosts({ payload }) {
 
-  const requestURL = `${API_BASE}/gallery/${section}/${sort}/${window}/1?showViral=${isViral}`;
+  const requestURL = `${API_BASE}${GET_CALENDAR_POSTS}`;
 
   try {
     const images = yield call(request, requestURL);
-    yield put(imagesLoaded(images));
+    yield put(postsLoaded(images));
   } catch (err) {
-    yield put(imagesLoadingError(err));
+    yield put(postsLoadingError(err));
   }
 }
 
-/**
- * Root saga manages watcher lifecycle
- */
-export default function* githubData() {
-  yield takeLatest(FETCH_IMAGES, getImages);
+
+export default function* calendarData() {
+  yield takeLatest(FETCH_POSTS, getPosts);
 }

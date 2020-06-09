@@ -1,10 +1,7 @@
 import React, { useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { createStructuredSelector } from 'reselect';
-import { withRouter } from 'react-router-dom';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import { Page } from 'tabler-react';
@@ -16,13 +13,20 @@ import 'react-toggle/style.css';
 import SiteWrapper from '../Wrapper/SiteWrapper';
 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import {useDispatch, useSelector} from "react-redux";
+import {loadPosts} from "./actions";
 const key = 'home';
 
 export function CalendarContainer() {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
+  //useSelector()
+  //useDispatch()
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+
+    loadPosts()
+  }, []);
 
   const localizer = momentLocalizer(moment); // or globalizeLocalizer
 
@@ -43,23 +47,26 @@ export function CalendarContainer() {
       },
     });
 
+  const onSelectEvent = event => {
+    alert(event.title);
+  };
+
   return (
     <SiteWrapper>
       <Page.Content>
         <Helmet>
-          <title>Home Page</title>
-          <meta name="description" content="Gallery" />
+          <title>Calendar</title>
+          <meta name="description" />
         </Helmet>
         <div className="calendar">
           <Calendar
             events={events}
             localizer={localizer}
-            startAccessor="start"
-            endAccessor="end"
-            onSelectEvent={event => alert(event.title)}
+            onSelectEvent={onSelectEvent}
             components={{
               timeSlotWrapper: ColoredDateCellWrapper,
             }}
+            views={{ month: true, week: true }}
           />
         </div>
       </Page.Content>
@@ -73,19 +80,4 @@ Calendar.propTypes = {
   loading: PropTypes.bool,
 };
 
-const mapStateToProps = createStructuredSelector({});
-
-export function mapDispatchToProps() {
-  return {};
-}
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
-
-export default compose(
-  withConnect,
-  withRouter,
-  memo,
-)(CalendarContainer);
+export default compose(memo)(CalendarContainer);

@@ -1,26 +1,26 @@
 import {
-  FETCH_IMAGES,
-  FETCH_IMAGES_ERROR,
-  FETCH_IMAGES_SUCCESS,
+  FETCH_POSTS,
+  FETCH_POSTS_ERROR,
+  FETCH_POSTS_SUCCESS,
 } from './constants';
 
-export function loadImages(payload) {
+export function loadPosts(payload) {
   return {
-    type: FETCH_IMAGES,
+    type: FETCH_POSTS,
     payload,
   };
 }
 
-export function imagesLoaded(payload) {
+export function postsLoaded(payload) {
   return {
-    type: FETCH_IMAGES_SUCCESS,
+    type: FETCH_POSTS_SUCCESS,
     payload,
   };
 }
 
-export function imagesLoadingError(err) {
+export function postsLoadingError(err) {
   return {
-    type: FETCH_IMAGES_ERROR,
+    type: FETCH_POSTS_ERROR,
     err,
   };
 }

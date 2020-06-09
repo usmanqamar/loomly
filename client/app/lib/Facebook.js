@@ -10,7 +10,7 @@ export class Facebook {
         xfbml: true,
         version: 'v2.5',
       });
-      window.FB = FB
+      window.FB = FB;
       resolve(FB);
     });
   }

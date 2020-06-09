@@ -64,7 +64,7 @@ export function* loadCalendar() {
   const fake = {
     id: 11,
     name: 'Test',
-    users: [{ fullName: 'Usman Qamar' },{ fullName: 'Usman Qamar 2' }],
+    users: [{ fullName: 'Usman Qamar' }, { fullName: 'Usman Qamar 2' }],
     accounts: { FB: { connected: true, page: { name: 'Test Page' } } },
   };
 
@@ -72,9 +72,8 @@ export function* loadCalendar() {
     const calendar = yield call(request, requestURL, fake);
     yield put(calendarLoaded(calendar));
   } catch (err) {
-    //yield put(calendarLoadingError(err));
+    // yield put(calendarLoadingError(err));
     yield put(calendarLoaded(fake));
-
   }
 }
 

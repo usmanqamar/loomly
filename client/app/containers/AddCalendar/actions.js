@@ -14,8 +14,7 @@ import {
   INVITE_USER_FAILURE,
   FETCH_CALENDAR_USER,
   FETCH_CALENDAR_USER_FAILURE,
-  FETCH_CALENDAR_USER_SUCCESS
-
+  FETCH_CALENDAR_USER_SUCCESS,
 } from './constants';
 
 export function addCalendar(payload) {

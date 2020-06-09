@@ -20,7 +20,7 @@ const CalendarUser = ({ users }) => (
             <Table.Col>{user.fullName}</Table.Col>
             <Table.Col>{user.username}</Table.Col>
 
-            <Table.Col alignContent='right'>
+            <Table.Col alignContent="right">
               <Button color="primary">Revoke</Button>
             </Table.Col>
           </Table.Row>
