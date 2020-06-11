@@ -1,37 +1,37 @@
 import produce from 'immer';
 import {
-  FETCH_IMAGES_SUCCESS,
-  FETCH_IMAGES_ERROR,
-  FETCH_IMAGES,
+  FETCH_POSTS,
+  FETCH_POSTS_ERROR,
+  FETCH_POSTS_SUCCESS,
 } from './constants';
 
 // The initial state of the App
 export const initialState = {
   loading: false,
   error: null,
-  images: [],
+  posts: [],
 };
 
 /* eslint-disable default-case, no-param-reassign */
-const homeReducer = (state = initialState, action) =>
+const calendarReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case FETCH_IMAGES:
+      case FETCH_POSTS:
         draft.loading = true;
         break;
 
-      case FETCH_IMAGES_SUCCESS:
+      case FETCH_POSTS_SUCCESS:
         draft.loading = false;
-        draft.images = action.payload.data;
+        draft.posts = action.payload.data;
         draft.error = null;
         break;
 
-      case FETCH_IMAGES_ERROR:
+      case FETCH_POSTS_ERROR:
         draft.loading = false;
         draft.error = action.err;
-        draft.images = [];
+        draft.posts = [];
         break;
     }
   });
 
-export default homeReducer;
+export default calendarReducer;

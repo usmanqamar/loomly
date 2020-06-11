@@ -7,38 +7,37 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { Page } from 'tabler-react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import reducer from './reducer';
 import saga from './saga';
 import 'react-toggle/style.css';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 import SiteWrapper from '../Wrapper/SiteWrapper';
 
-import 'react-big-calendar/lib/css/react-big-calendar.css';
-import {useDispatch, useSelector} from "react-redux";
-import {loadPosts} from "./actions";
-const key = 'home';
+import { loadPosts } from './actions';
+import {
+  makeSelectError,
+  makeSelectLoading,
+  makeSelectPosts,
+} from './selectors';
+const key = 'calendar';
 
 export function CalendarContainer() {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
-  //useSelector()
-  //useDispatch()
+  const loading = useSelector(makeSelectLoading());
+  const error = useSelector(makeSelectError());
+  const posts = useSelector(makeSelectPosts());
 
+  const dispatch = useDispatch();
+  const params = useParams();
+  const { id } = params;
   useEffect(() => {
-
-    loadPosts()
+    dispatch(loadPosts(id));
   }, []);
 
   const localizer = momentLocalizer(moment); // or globalizeLocalizer
-
-  const events = [
-    {
-      id: 0,
-      title: 'All Day Event very long title',
-      allDay: true,
-      start: new Date(),
-      end: new Date(),
-    },
-  ];
 
   const ColoredDateCellWrapper = ({ children }) =>
     React.cloneElement(React.Children.only(children), {
@@ -60,7 +59,7 @@ export function CalendarContainer() {
         </Helmet>
         <div className="calendar">
           <Calendar
-            events={events}
+            events={posts}
             localizer={localizer}
             onSelectEvent={onSelectEvent}
             components={{
